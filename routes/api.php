@@ -14,3 +14,5 @@ Route::post('registro', [AuthController::class, 'registro']);
 
 // Define una ruta para el inicio de sesión de usuarios utilizando el método 'login' del controlador AuthController
 Route::post('login', [AuthController::class, 'login']);
+
+Route::post('/register_user', 'App\Http\Controllers\Auth\RegisterController@register');

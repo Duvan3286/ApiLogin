@@ -41,11 +41,12 @@ class AuthController extends Controller
 
     // Verificar credenciales del usuario
     if (! $token  = auth()->attempt($request->only('email', 'password'))) {
-        return response()->json(['mensaje' => 'Credenciales incorrectas'], 401);
+        return response()->json(['message' => 'Credenciales incorrectas', 'status' => false], 401);
     }
 
    if($token){
-    return response()->json(['mensaje' => 'Autenticacion exitosa'], 200);
+    
+    return response()->json(['message' => 'Autenticacion exitosa', 'status' => true,'user' => auth()->user()], 200);
    }
 }
 }
