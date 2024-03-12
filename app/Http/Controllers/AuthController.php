@@ -28,7 +28,7 @@ class AuthController extends Controller
         // Guardar el usuario en la base de datos
         $usuario->save();
 
-        return response()->json(['mensaje' => 'Usuario registrado satisfactoriamente'], 201);
+        return response()->json(['message' => 'Usuario registrado satisfactoriamente',"user"=> $usuario], 201);
     }
 
      public function login(Request $request)
