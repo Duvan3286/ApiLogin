@@ -15,6 +15,10 @@ class RegisterController extends Controller
             'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
+            
+
+           
+
         ]);
 
         // Crear un nuevo usuario
@@ -22,6 +26,7 @@ class RegisterController extends Controller
             'name' => $request->username,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            
         ]);
 
         // Retornar una respuesta JSON

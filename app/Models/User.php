@@ -17,6 +17,7 @@ class User extends Model implements AuthenticatableContract
         'name',
         'email',
         'password',
+        'type_users_id',
     ];
 
     // Use el trait HasFactory para permitir la creación de instancias de este modelo utilizando Factories

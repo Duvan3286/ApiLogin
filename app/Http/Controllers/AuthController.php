@@ -16,13 +16,16 @@ class AuthController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6',
+            'type_users' => 'required',
+           
         ]);
 
         // Crear un nuevo usuario
         $usuario = new User([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'type_users_id' => $request->type_users,
         ]);
 
         // Guardar el usuario en la base de datos
@@ -37,6 +40,7 @@ class AuthController extends Controller
     $request->validate([
         'email' => 'required|email',
         'password' => 'required|string',
+        
     ]);
 
     // Verificar credenciales del usuario
