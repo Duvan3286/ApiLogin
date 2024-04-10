@@ -57,19 +57,23 @@ class PersonController extends Controller
 
     public function borrar(Request $request)
     {
-
-        $person = Person::where('identification', $request->id)->first();
-
+        $person = Person::find($request->id);
+    
         if ($person) {
-
             $person->delete();
-
             return response()->json(['success' => true, 'message' => 'Persona eliminada correctamente'], 200);
         } else {
-
             return response()->json(['success' => false, 'message' => 'La persona no existe'], 404);
         }
     }
+
+    public function index()
+    {
+
+        $people = Person::all(); 
+        return response()->json($people); 
+    }
+    
 
    
 }

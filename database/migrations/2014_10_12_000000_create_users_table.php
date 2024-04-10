@@ -14,12 +14,15 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id(); // Crea una columna autoincremental 'id'
             $table->string('name'); // Crea una columna 'name' de tipo string
-            $table->string('email')->unique(); // Crea una columna 'email' de tipo string y único
+            $table->string('email', 191)->unique();
+            $table->string('token', 255);
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
             $table->timestamp('email_verified_at')->nullable(); // Crea una columna 'email_verified_at' de tipo timestamp que puede ser nula
             $table->string('password'); // Crea una columna 'password' de tipo string
             $table->string('api_token', 100)->unique()->nullable(); // Crea una columna 'api_token' de tipo string, único y con longitud máxima de 100, que puede ser nula
             $table->rememberToken(); // Crea una columna 'remember_token' utilizada por el sistema de autenticación de Laravel
-            $table->timestamps(); // Crea dos columnas 'created_at' y 'updated_at' para control de fechas de creación y actualización de registros
+            //$table->timestamps(); // Crea dos columnas 'created_at' y 'updated_at' para control de fechas de creación y actualización de registros
         });
     }
 

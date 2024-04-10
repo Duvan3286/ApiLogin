@@ -23,4 +23,7 @@ Route::delete('/delete_person/{id}', [PersonController::class, 'borrar']);
 
 Route::get('usuarios', [UserController::class, 'index']);
 
+Route::get('persons', [PersonController::class, 'index']);
+
 Route::delete('/delete_user/{id}', [UserController::class, 'borrar']);
+
