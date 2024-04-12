@@ -40,8 +40,7 @@ class PersonController extends Controller
         
 
 
-        // Guardar el usuario en la base de datos
-        //$person->save();
+       
 
         return response()->json(['message' => 'persona registrada satisfactoriamente', "person" => $person], 201);
     }

@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\AccessController;
 use App\Http\Controllers\AuthController; 
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\UserController;
@@ -27,3 +27,6 @@ Route::get('persons', [PersonController::class, 'index']);
 
 Route::delete('/delete_user/{id}', [UserController::class, 'borrar']);
 
+Route::post('entrada', [AccessController::class, 'Entrada']);
+
+Route::get('access', [AccessController::class, 'index']);
