@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Access;
 use Illuminate\Http\Request;
 use App\Models\Person;
 
@@ -17,11 +18,11 @@ class PersonController extends Controller
             'lastname' => 'required|string',
             //'type_person_id' => 'required|string',
             'job' => 'required|string',
-            'destination' => 'required|string',
+            //'destination' => 'required|string',
             'address' => 'required|string',
             'phone' => 'required|string',
             'email' => 'required|string',
-            'reason' => 'required|string',
+            //'reason' => 'required|string',
         ]);
 
         
@@ -31,11 +32,11 @@ class PersonController extends Controller
                 'lastname' => $request->lastname,
                 'type_person_id' => $request->type_person_id,
                 'job' => $request->job,
-                'destination' => $request->destination,
+                //'destination' => $request->destination,
                 'address' => $request->address,
                 'phone' => $request->phone,
                 'email' => $request->email,
-                'reason' => $request->reason
+                //'reason' => $request->reason
             ]);
         
 
@@ -50,7 +51,11 @@ class PersonController extends Controller
     {
 
         $personData = Person::where('identification', $request->identification)->first();
-        return response()->json(["person" => $personData], 201);
+        $checkAccess = array();
+        if($personData){
+            $checkAccess = Access::where(['idPerson' => $personData->id])->orderBy('id', 'desc')->first();
+        }
+        return response()->json(["person" => $personData, 'access' => $checkAccess], 200);
     }
 
 

@@ -19,11 +19,11 @@ class Person extends Model
         'lastname',
         'type_person_id',
         'job',
-        'destination',
+        //'destination',
         'address',
         'phone',
         'email',
-        'reason'
+        //'reason'
     ];
 
     // Use el trait HasFactory para permitir la creación de instancias de este modelo utilizando Factories

@@ -12,7 +12,7 @@ class AccessController extends Controller
     public function index(Request $request)
     {
 
-        $access = DB::select("SELECT a.id, a.fecha_hora_ingreso, a.motivo, a.IdPuerta, p.* FROM access a join person p on a.idPerson = p.id");
+        $access = DB::select("SELECT a.id, a.fecha_hora_ingreso, a.motivo, a.IdPuerta, a.status, p.* FROM access a join person p on a.idPerson = p.id");
         return response()->json($access, 200);
 
     }
@@ -20,24 +20,35 @@ class AccessController extends Controller
     {
         try {
             
+            $messageRepsonse = 'Entrada registrada correctamente';
             $data = $request->all();
-            $request->validate([
-
+            $validateData = [
                 'person_id' => 'required',
                 'reason' => 'required',
                 'destination' => 'required'
                 
-            ]);
+            ];
+            $access =  $data['access'];
+            $status = 1;
+
+            if(isset($access) && $access['status'] == 1){
+                $validateData = ['person_id' => 'required'];
+                $messageRepsonse = 'Salida registrada correctamente';
+                $status = 0;
+            }   
+
+            $request->validate($validateData);
         
             $access = new Access();
             $access->idPerson = $data['person_id']; 
             $access->fecha_hora_ingreso = date('Y-m-d H:i:s'); 
             $access->motivo = $data['reason']; 
             $access->IdPuerta  = 1; 
+            $access->status = $status;
             $access->save();
 
            
-            return response()->json(['message' => 'Entrada registrada correctamente'], 200);
+            return response()->json(['message' => $messageRepsonse], 200);
         } catch (\Exception $e) {
             
             return response()->json(['error' => $e->getMessage()], 400);
