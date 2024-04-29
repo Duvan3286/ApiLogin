@@ -12,7 +12,7 @@ class AccessController extends Controller
     public function index(Request $request)
     {
 
-        $access = DB::select("SELECT a.id, a.fecha_hora_ingreso, a.motivo, a.IdPuerta, a.status, p.* FROM access a join person p on a.idPerson = p.id");
+        $access = DB::select("SELECT a.id, a.fecha_hora_ingreso, a.motivo, a.IdPuerta, a.status, a.destination, p.* FROM access a join person p on a.idPerson = p.id");
         return response()->json($access, 200);
 
     }
@@ -45,6 +45,7 @@ class AccessController extends Controller
             $access->motivo = $data['reason']; 
             $access->IdPuerta  = 1; 
             $access->status = $status;
+            $access->destination = $data['destination'];
             $access->save();
 
            
